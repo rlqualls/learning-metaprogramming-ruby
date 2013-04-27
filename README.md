@@ -1,7 +1,7 @@
 learning-metaprogramming-ruby
 -----------------------------
 
-This repository is a collection is annotations and snippets that go along with 
+This repository is a collection of annotations and snippets that go along with 
 each chapter ("day") of the book Metaprogramming Ruby by Paolo Perrotta. Aside 
 from trivially narrow snippets ("abc".class), I have generally tried to avoid 
 plagiarism and provide my own versions of the ideas presented in the book. In 
