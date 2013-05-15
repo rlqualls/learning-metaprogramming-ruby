@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby   # !> (...) interpreted as grouped expression
+#!/usr/bin/env ruby  
 # Copyright Robert Qualls 2013
 
 # The "eval" kernel method can be used to execute code in string format
@@ -51,7 +51,7 @@ injection_try # => "undefined method `size; Dir.glob('/*')' for [1, 2, 3, 4, 5]:
 
 # Let's see what happens when we set $SAFE to 3 and try to execute eval
 
-$SAFE = 3  # !> $SAFE=3 does no sandboxing; you might want to use $SAFE=4
+$SAFE = 3  
 dangerous_code = "'dangerous hacker codes'"
 dangerous_code.tainted? # => true
 result =
