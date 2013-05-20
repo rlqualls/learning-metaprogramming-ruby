@@ -21,6 +21,7 @@ end
 
 normal_str.methods.grep(/^up/)      # => [:upto, :upcase, :upcase!]
 enhanced_str.methods.grep(/^up/)    # => [:upall, :upto, :upcase, :upcase!]
+enhanced_str.singleton_methods      # => [:upall]
 enhanced_str.upall                  # => "ABC"
 
 # Also, even though methods live in classes, upall is not in String's methods
@@ -34,7 +35,7 @@ eigen = class << enhanced_str
   self
 end
 
-eigen                               # => #<Class:#<String:0x8738838>>
+eigen                               # => #<Class:#<String:0x9f20e28>>
 eigen.class                         # => Class
 eigen.superclass                    # => String
 eigen.instance_methods.grep(/^up/)  # => [:upall, :upto, :upcase, :upcase!]
@@ -44,23 +45,27 @@ eigen.instance_methods.grep(/^up/)  # => [:upall, :upto, :upcase, :upcase!]
 # Class Methods:
 #
 # A class method is actually just a singleton method defined on a class 
-# Compare:
+# Compare these two ways of generating a random string
+# Note: this technique was taken from stackoverflow.com/questions/88311/
 
 # singleton method on an object of class string:
 
 str = String.new
 def str.random(size)
-  array = size.times.map { Random.rand(9).to_s }
-  array.join
+  (0...8).map {(65 + rand(26)).chr}.join
 end
 
-str.random(5)    # => "66725"
+str.random(5)    # => "XIVXKCOF"
 
 # singleton method on an object of class Class:
 
 def String.random(size)
-  array = size.times.map { Random.rand(9).to_s  }
-  array.join
+  (0...8).map {(65 + rand(26)).chr}.join
 end
 
-String.random(5) # => "25057"
+String.random(5) # => "TZNDWCKW"
+
+# The "singleton_methods" method works on both class objects and instance objects 
+
+str.singleton_methods         # => [:random]
+String.singleton_methods      # => [:try_convert, :random]
